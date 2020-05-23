@@ -80,7 +80,7 @@ namespace ToDoApp.Controllers
         {
             var comment = await _context.Comments
                                             .Include(c => c.Task)
-                                            .FirstAsync(c => c.Id == id);
+                                            .FirstOrDefaultAsync(c => c.Id == id);
             if (comment == null)
             {
                 return NotFound();

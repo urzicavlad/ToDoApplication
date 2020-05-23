@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using ToDoApp.Models;
 using ToDoApp.ViewModels;
 
 namespace ToDoApp.ModelValidators

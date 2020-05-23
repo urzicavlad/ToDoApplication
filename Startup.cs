@@ -39,6 +39,12 @@ namespace ToDoApplication
             {
                 options.UseSqlServer(Configuration.GetConnectionString("ToDoAppConnection"));
             });
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "wwwroot/dist";
+            });
+
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
@@ -89,6 +95,21 @@ namespace ToDoApplication
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSpaStaticFiles();
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
+
+                spa.Options.SourcePath = "wwwroot";
+
+                //if (env.IsDevelopment())
+                //{
+                //    spa.UseAngularCliServer(npmScript: "start");
+                //}
+            });
         }
     }
 }
+
