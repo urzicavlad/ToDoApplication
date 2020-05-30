@@ -12,5 +12,7 @@ namespace ToDoApp.ViewModels
         public string Importance { get; set; }
         public string State { get; set; }
         public DateTime? ClosedAt { get; set; }
+        public long NumberOfComments { get; set; }
+
     }
 }

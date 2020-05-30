@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,7 +43,7 @@ namespace ToDoApplication
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "wwwroot/dist";
+                configuration.RootPath = "ClientApp/dist";
             });
 
             // Register the Swagger generator, defining 1 or more Swagger documents
@@ -104,10 +105,10 @@ namespace ToDoApplication
 
                 spa.Options.SourcePath = "wwwroot";
 
-                //if (env.IsDevelopment())
-                //{
-                //    spa.UseAngularCliServer(npmScript: "start");
-                //}
+               // if (env.IsDevelopment())
+               // {
+               //     spa.UseAngularCliServer(npmScript: "start");
+               // }
             });
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using ToDoApp.Models;
 using ToDoApp.ViewModels;
@@ -8,6 +9,7 @@ namespace ToDoApplication.Mappers
     public class TaskMapper
     {
 
+     
         public static TaskDto mapToDto(Task task) {
             TaskDto result = new TaskDto();
             result.Id = task.Id;
@@ -21,6 +23,7 @@ namespace ToDoApplication.Mappers
             return result;
         }
 
+      
         public static List<TaskDto> mapToDtoList(IEnumerable<Task> tasks)
         {
             List<TaskDto> tasksDto = new List<TaskDto>();

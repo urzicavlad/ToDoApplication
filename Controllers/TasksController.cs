@@ -40,8 +40,12 @@ namespace ToDoApp.Controllers
             }
 
             var tasksFromRepository = await result.ToListAsync();
-
-            return Ok(TaskMapper.mapToDtoList(tasksFromRepository));
+            List<TaskDto> tasksDto = TaskMapper.mapToDtoList(tasksFromRepository);
+            tasksDto.ForEach(e =>
+            e.NumberOfComments = _context.Comments
+            .Where(c => c.Task.Id == e.Id)
+            .Include(c => c.Task).ToList().Count);
+            return Ok(tasksDto);
         }
 
 
