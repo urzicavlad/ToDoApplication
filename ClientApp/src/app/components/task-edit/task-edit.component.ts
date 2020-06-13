@@ -11,15 +11,16 @@ import {ActivatedRoute} from '@angular/router';
 export class TaskEditComponent implements OnInit {
 
   public task: Task;
-  public
+  public taskId: string;
+  successSaved: boolean;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      let taskId = params.get('taskId');
-      this.loadTask(taskId);
+      this.taskId = params.get('taskId');
+      this.loadTask(this.taskId);
     });
   }
 
@@ -32,10 +33,12 @@ export class TaskEditComponent implements OnInit {
   }
 
   updateTask() {
-    this.http.put<Task>(`${this.baseUrl}tasks/${this.task.id}`, this.task).subscribe(result => {
+    this.http.put<Task>(`${this.baseUrl}tasks/${this.taskId}`, this.task).subscribe(result => {
       console.log(result);
       this.task = result;
       console.log(this.task);
+      this.successSaved = true;
+      this.loadTask(this.taskId);
     }, error => console.error(error));
   }
 }
