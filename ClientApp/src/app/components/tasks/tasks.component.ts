@@ -1,17 +1,21 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Task} from 'src/app/models/task';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-fetch-data',
   templateUrl: './tasks.component.html'
 })
-export class TasksComponent {
+export class TasksComponent implements OnInit {
   public tasks: Task[];
   public copy: Task[];
+  searchForm: FormGroup;
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-    this.loadTasks();
+  constructor(private http: HttpClient, private formBuilder: FormBuilder, @Inject('BASE_URL') private baseUrl: string) {
+    this.searchForm = this.formBuilder.group({
+      searchValue: ['', Validators.required]
+    });
   }
 
   private loadTasks() {
@@ -46,8 +50,18 @@ export class TasksComponent {
     };
   }
 
+  filterByTitle() {
+    const rawValue = this.searchForm.getRawValue();
+    console.log(rawValue);
+    this.http.get<Task[]>(`${this.baseUrl}tasks`).subscribe(result => {
+      this.tasks = result.filter(task => task.title.startsWith(rawValue.searchValue));
+      if (this.tasks.length === 0) {
+        this.tasks = result;
+      }
+    }, error => console.error(error));
+  }
 
-  filterByTitle(value: string) {
-    this.tasks = this.tasks.filter(task => task.title.startsWith(value));
+  ngOnInit(): void {
+    this.loadTasks();
   }
 }

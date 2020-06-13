@@ -12,9 +12,10 @@
 <button class="btn btn-primary mb-3 ml-2" (click)="tasks.sort(dynamicSort('title'))">Sort by title</button>
 <button class="btn btn-primary mb-3 ml-2" (click)="tasks.sort(dynamicSort('description'))">Sort by description</button>
 
-<form class="form-inline">
-  <input class="form-control mr-sm-2" type="search" placeholder="Search by title" aria-label="Search">
-  <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="filterByTitle('')">Search</button>
+<form class="form-inline" [formGroup]="searchForm">
+  <input class="form-control mr-sm-2" formControlName="searchValue" type="search" placeholder="Search by title" aria-label="Search">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="filterByTitle($event.target)">Search
+  </button>
 </form>
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="tasks">
