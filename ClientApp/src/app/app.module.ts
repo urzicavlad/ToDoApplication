@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { TaskDetailComponent } from './components/task-detail/task-detail.component';
 import { TaskCreateComponent } from './components/task-create/task-create.component';
+import { TaskEditComponent } from './components/task-edit/task-edit.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { TaskCreateComponent } from './components/task-create/task-create.compon
     HomeComponent,
     TasksComponent,
     TaskDetailComponent,
-    TaskCreateComponent
+    TaskCreateComponent,
+    TaskEditComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -28,6 +30,7 @@ import { TaskCreateComponent } from './components/task-create/task-create.compon
       {path: 'tasks', component: TasksComponent},
       {path: 'task-details/:taskId', component: TaskDetailComponent},
       {path: 'task-create', component: TaskCreateComponent},
+      {path: 'task-edit/:taskId', component: TaskEditComponent},
     ]),
     ReactiveFormsModule
   ],

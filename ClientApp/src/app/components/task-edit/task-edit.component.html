@@ -1,0 +1,52 @@
+<form>
+
+  <label for="title">Title</label>
+  <input class="form-control"
+         [(ngModel)]="task.title" [value]="task.title"
+         id="title"
+         name="title" type="text"
+  />
+
+  <label for="description">Description</label>
+  <textarea class="form-control"
+            [(ngModel)]="task.description" [value]="task.description"
+            id="description"
+            name="description" type="text"></textarea>
+
+  <label for="added">Added</label>
+  <input class="form-control"
+         [(ngModel)]="task.added" [value]="task.added"
+         id="added"
+         name="added"
+         type="datetime-local">
+
+  <label for="deadline">Deadline</label>
+  <input class="form-control"
+         [(ngModel)]="task.deadline" [value]="task.deadline"
+         id="deadline"
+         name="deadline"
+         type="datetime-local">
+
+  <label for="importance">Importance</label><br>
+  <select class="form-control"
+          [(ngModel)]="task.importance" [value]="task.importance"
+          name="importance"
+          id="importance">
+    <option value="High">High</option>
+    <option value="Low">Low</option>
+    <option value="Medium">Medium</option>
+  </select>
+
+  <label for="state">State</label><br>
+  <select class="form-control"
+          [(ngModel)]="task.state" [value]="task.state"
+          name="state"
+          id="state">
+    <option value="Open">Open</option>
+    <option value="InProgress">In Progress</option>
+    <option value="Closed">Closed</option>
+  </select>
+
+  <button type=submit (click)="updateTask()" class="btn btn-primary mt-3">Edit <i class="fa fa-spinner fa-spin"
+                                                                                          *ngIf="loading"></i></button>
+</form>

@@ -13,7 +13,7 @@ export class TaskCreateComponent implements OnInit {
   taskForm: FormGroup;
   submitted = false;
   successValidated = false;
-  private successSaved: boolean;
+  successSaved: boolean;
   loading: boolean;
   serverErrorOccurred: boolean;
   serverErrorMessage: string;

@@ -46,7 +46,7 @@
     <td>{{ task.numberOfComments }}</td>
     <td>
       <button class="btn btn-primary m-2" [routerLink]="['/task-details', task.id]">Details</button>
-      <button class="btn btn-info m-2">Edit</button>
+      <button class="btn btn-info m-2" [routerLink]="['/task-edit', task.id]">Edit</button>
       <button class="btn btn-danger m-2" (click)="delete(task.id)">Delete</button>
     </td>
   </tr>
