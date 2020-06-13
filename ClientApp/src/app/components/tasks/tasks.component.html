@@ -1,0 +1,43 @@
+<h1 id="tableLabel">Tasks</h1>
+
+<div *ngIf="!tasks" class="d-flex justify-content-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<button class="btn btn-primary mb-3" [routerLink]="['/task-create']">Add</button>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="tasks">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Added</th>
+    <th>DeadLine</th>
+    <th>Importance</th>
+    <th>State</th>
+    <th>ClosedAt</th>
+    <th>Comments</th>
+    <th>Operations</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let task of tasks">
+    <td>{{ task.id }}</td>
+    <td>{{ task.title }}</td>
+    <td>{{ task.description }}</td>
+    <td>{{ task.added }}</td>
+    <td>{{ task.deadline }}</td>
+    <td>{{ task.importance }}</td>
+    <td>{{ task.state }}</td>
+    <td>{{ task.closedAt }}</td>
+    <td>{{ task.numberOfComments }}</td>
+    <td>
+      <button class="btn btn-primary" [routerLink]="['/task-details', task.id]">Details</button>
+      <button class="btn btn-info">Edit</button>
+      <button class="btn btn-danger" (click)="delete(task.id)">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

@@ -119,9 +119,7 @@ namespace ToDoApp.Controllers
             _context.Tasks.Add(taskEntity);
             await _context.SaveChangesAsync();
 
-            var taskToReturn = TaskMapper.mapToDto(taskEntity);
-
-            return CreatedAtAction("GetTask", new { id = taskEntity.Id }, taskToReturn);
+            return Ok(TaskMapper.mapToDto(taskEntity));
         }
 
 

@@ -1,0 +1,103 @@
+<h1 id="tableLabel">Task</h1>
+
+<p *ngIf="!taskDetails.task"><em>Loading task...</em></p>
+<button class="btn btn-info mb-5" routerLink="/tasks">Back</button>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="taskDetails">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Added</th>
+    <th>DeadLine</th>
+    <th>Importance</th>
+    <th>State</th>
+    <th>ClosedAt</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>{{ taskDetails.task.id }}</td>
+    <td>{{ taskDetails.task.title }}</td>
+    <td>{{ taskDetails.task.description }}</td>
+    <td>{{ taskDetails.task.added }}</td>
+    <td>{{ taskDetails.task.deadline }}</td>
+    <td>{{ taskDetails.task.importance }}</td>
+    <td>{{ taskDetails.task.state }}</td>
+    <td>{{ taskDetails.task.closedAt }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<div *ngIf="!taskDetails.comments" class="d-flex justify-content-center">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading comments...</span>
+  </div>
+</div>
+
+<h1 id="commentsLabel" *ngIf="taskDetails.comments.length != 0">Comments</h1>
+<button class="btn btn-primary mb-3" data-toggle="modal" data-target="#commentModal">Add</button>
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="taskDetails.comments.length != 0">
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>Content</th>
+    <th>Important</th>
+    <th>Operations</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let comment of taskDetails.comments">
+    <td>{{ comment.id }}</td>
+    <td>{{ comment.text }}</td>
+    <td>{{ comment.important }}</td>
+    <td>
+    <td>
+      <button class="btn btn-info">Edit</button>
+      <button class="btn btn-danger">Delete</button>
+    </td>
+
+  </tr>
+  </tbody>
+</table>
+
+
+<!-- Comment Modal -->
+<div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add comment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label for="description">Description</label>
+        <textarea class="form-control" formControlName="description" id="description"
+                  name="description" type="text"></textarea>
+
+        <label for="important">Important</label>
+        <div id="important">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="important" id="important-yes" value="true" checked>
+            <label class="form-check-label" for="important-yes">
+              Yes
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="important" id="important-no" value="false">
+            <label class="form-check-label" for="important-no">
+              No
+            </label>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" (click)="saveComment()" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
