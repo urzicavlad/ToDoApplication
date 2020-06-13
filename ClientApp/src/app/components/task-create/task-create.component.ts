@@ -67,6 +67,7 @@ export class TaskCreateComponent implements OnInit {
         this.successSaved = true;
         console.log('Task was saved!');
         this.loading = false;
+
       });
 
   }

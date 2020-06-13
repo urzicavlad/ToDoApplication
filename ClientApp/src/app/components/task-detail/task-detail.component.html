@@ -36,7 +36,7 @@
 </div>
 
 <h1 id="commentsLabel" *ngIf="taskDetails.comments.length != 0">Comments</h1>
-<button class="btn btn-primary mb-3" data-toggle="modal" data-target="#commentModal">Add</button>
+<button class="btn btn-primary mb-3" data-toggle="modal" data-target="#commentModal">Add new comment</button>
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="taskDetails.comments.length != 0">
   <thead>
   <tr>
@@ -52,18 +52,16 @@
     <td>{{ comment.text }}</td>
     <td>{{ comment.important }}</td>
     <td>
-    <td>
-      <button class="btn btn-info">Edit</button>
-      <button class="btn btn-danger">Delete</button>
+      <button class="btn btn-info mr-2" data-toggle="modal" data-target="#commentModal">Edit</button>
+      <button class="btn btn-danger" (click)="deleteComment(comment.id)">Delete</button>
     </td>
-
   </tr>
   </tbody>
 </table>
 
-
 <!-- Comment Modal -->
-<div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel" aria-hidden="true">
+<div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel"
+     aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -73,30 +71,32 @@
         </button>
       </div>
       <div class="modal-body">
-        <label for="description">Description</label>
-        <textarea class="form-control" formControlName="description" id="description"
-                  name="description" type="text"></textarea>
+        <form [formGroup]="commentForm" autocomplete="off">
+          <label for="text">Text</label>
+          <textarea class="form-control" formControlName="text" id="text"
+                    name="text" type="text"></textarea>
 
-        <label for="important">Important</label>
-        <div id="important">
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="important" id="important-yes" value="true" checked>
-            <label class="form-check-label" for="important-yes">
-              Yes
-            </label>
+          <label for="important">Important</label>
+          <div id="important">
+            <div class="form-check">
+              <input class="form-check-input" formControlName="important" type="radio" name="important" id="important-yes" value="true" checked>
+              <label class="form-check-label" for="important-yes">
+                Yes
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" formControlName="important" type="radio" name="important" id="important-no" value="false">
+              <label class="form-check-label" for="important-no">
+                No
+              </label>
+            </div>
           </div>
-          <div class="form-check">
-            <input class="form-check-input" type="radio" name="important" id="important-no" value="false">
-            <label class="form-check-label" for="important-no">
-              No
-            </label>
-          </div>
-        </div>
-
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" (click)="saveComment()" class="btn btn-primary">Save</button>
+        <button id="closeModalButton" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type=submit (click)="onSubmit()" class="btn btn-primary">Save <i class="fa fa-spinner fa-spin"
+                                                                                    *ngIf="loading"></i></button>
       </div>
     </div>
   </div>

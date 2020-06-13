@@ -1,7 +1,9 @@
 <h1 id="tableLabel">Task information</h1>
 
 <button class="btn btn-info mb-3" routerLink="/tasks">Back</button>
-
+<div id="alert" class="alert alert-success" role="alert" *ngIf="successSaved">
+  Task was saved successfully!
+</div>
 <form [formGroup]="taskForm" autocomplete="off">
 
   <label for="title">Title</label>
@@ -37,5 +39,5 @@
   </select>
 
   <button type=submit (click)="onSubmit()" class="btn btn-primary mt-3">Create Account <i class="fa fa-spinner fa-spin"
-                                                                                     *ngIf="loading"></i></button>
+                                                                                          *ngIf="loading"></i></button>
 </form>

@@ -6,7 +6,17 @@
   </div>
 </div>
 
-<button class="btn btn-primary mb-3" [routerLink]="['/task-create']">Add</button>
+<button class="btn btn-primary mb-3" [routerLink]="['/task-create']">Add new task</button>
+
+<button class="btn btn-primary mb-3 ml-2" (click)="tasks.sort(dynamicSort('id'))">Sort by id</button>
+<button class="btn btn-primary mb-3 ml-2" (click)="tasks.sort(dynamicSort('title'))">Sort by title</button>
+<button class="btn btn-primary mb-3 ml-2" (click)="tasks.sort(dynamicSort('description'))">Sort by description</button>
+
+<form class="form-inline">
+  <input class="form-control mr-sm-2" type="search" placeholder="Search by title" aria-label="Search">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="filterByTitle('')">Search</button>
+</form>
+
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="tasks">
   <thead>
   <tr>
@@ -34,9 +44,9 @@
     <td>{{ task.closedAt }}</td>
     <td>{{ task.numberOfComments }}</td>
     <td>
-      <button class="btn btn-primary" [routerLink]="['/task-details', task.id]">Details</button>
-      <button class="btn btn-info">Edit</button>
-      <button class="btn btn-danger" (click)="delete(task.id)">Delete</button>
+      <button class="btn btn-primary m-2" [routerLink]="['/task-details', task.id]">Details</button>
+      <button class="btn btn-info m-2">Edit</button>
+      <button class="btn btn-danger m-2" (click)="delete(task.id)">Delete</button>
     </td>
   </tr>
   </tbody>
