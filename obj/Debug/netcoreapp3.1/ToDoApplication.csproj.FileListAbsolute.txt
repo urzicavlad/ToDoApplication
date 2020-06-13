@@ -157,7 +157,6 @@ C:\Users\cristian.urzica\source\repos\ToDoApplication\obj\Debug\netcoreapp3.1\To
 C:\Users\cristian.urzica\source\repos\ToDoApplication\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
 C:\Users\cristian.urzica\source\repos\ToDoApplication\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
 C:\Users\cristian.urzica\source\repos\ToDoApplication\bin\Debug\netcoreapp3.1\ClientApp\angular.json
-C:\Users\cristian.urzica\source\repos\ToDoApplication\bin\Debug\netcoreapp3.1\ClientApp\e2e\tsconfig.e2e.json
 C:\Users\cristian.urzica\source\repos\ToDoApplication\bin\Debug\netcoreapp3.1\ClientApp\package-lock.json
 C:\Users\cristian.urzica\source\repos\ToDoApplication\bin\Debug\netcoreapp3.1\ClientApp\package.json
 C:\Users\cristian.urzica\source\repos\ToDoApplication\bin\Debug\netcoreapp3.1\ClientApp\src\tsconfig.app.json
