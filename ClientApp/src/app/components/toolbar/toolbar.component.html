@@ -1,0 +1,11 @@
+<mat-toolbar>
+  <button mat-button [routerLink]="['/task-details', 20]">
+    <mat-icon>add</mat-icon>More</button>
+  <button mat-button  [routerLink]="['/task-edit', 20]">
+    <mat-icon>edit</mat-icon>Edit</button>
+  <button mat-button>
+    <mat-icon>delete_forever</mat-icon>Delete</button>
+  <button mat-button matBadge="{{tasks.length}}" matBadgePosition="above after" [routerLink]="['/task-create']">
+    <mat-icon>library_add</mat-icon>New Task
+  </button>
+</mat-toolbar>

@@ -1,6 +1,6 @@
-<h1 id="tableLabel">Task</h1>
+<h1 id="tableLabel">Task Details</h1>
 
-<p *ngIf="!taskDetails.task"><em>Loading task...</em></p>
+<mat-spinner *ngIf="!taskDetails.task"></mat-spinner>
 <button class="btn btn-info mb-5" routerLink="/tasks">Back</button>
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="taskDetails">
   <thead>
@@ -50,10 +50,16 @@
   <tr *ngFor="let comment of taskDetails.comments">
     <td>{{ comment.id }}</td>
     <td>{{ comment.text }}</td>
-    <td>{{ comment.important }}</td>
     <td>
-      <button class="btn btn-info mr-2" data-toggle="modal" data-target="#commentModal">Edit</button>
-      <button class="btn btn-danger" (click)="deleteComment(comment.id)">Delete</button>
+      <mat-slide-toggle [(ngModel)]="comment.important" (change)="editComment(comment)" class="mt-2"></mat-slide-toggle>
+    </td>
+    <td>
+      <button mat-icon-button data-toggle="modal" data-target="#commentModal">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <button mat-icon-button (click)="deleteComment(comment.id)">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
     </td>
   </tr>
   </tbody>
@@ -75,22 +81,7 @@
           <label for="text">Text</label>
           <textarea class="form-control" formControlName="text" id="text"
                     name="text" type="text"></textarea>
-
-          <label for="important">Important</label>
-          <div id="important">
-            <div class="form-check">
-              <input class="form-check-input" formControlName="important" type="radio" name="important" id="important-yes" value="true" checked>
-              <label class="form-check-label" for="important-yes">
-                Yes
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" formControlName="important" type="radio" name="important" id="important-no" value="false">
-              <label class="form-check-label" for="important-no">
-                No
-              </label>
-            </div>
-          </div>
+          <mat-slide-toggle formControlName="important" class="mt-2">Important</mat-slide-toggle>
         </form>
       </div>
       <div class="modal-footer">

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "echo Starting && ng serve --open",
     "build": "ng build",
     "build:ssr": "ng run ToDoApplicationUI:server:dev",
     "test": "ng test",

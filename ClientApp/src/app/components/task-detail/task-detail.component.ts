@@ -70,6 +70,25 @@ export class TaskDetailComponent implements OnInit {
     }
   }
 
+  editComment(comment: Comment) {
+    console.log('Edit comment');
+    this.http.put(`${this.baseUrl}comments/${comment.id}`, comment).subscribe(() => {
+        this.successSaved = true;
+      },
+      error => {
+        console.log('Error in editing comment task: ', error);
+        this.serverErrorOccurred = true;
+        this.successSaved = false;
+        this.loading = false;
+        this.serverErrorMessage = error.error.message;
+      },
+      () => {
+        this.successSaved = true;
+        console.log('Comment task was edited!');
+        this.loading = false;
+      });
+  }
+
   onSubmit() {
     console.log('Comment form was submitted!');
     this.validateForm();

@@ -1,54 +1,17 @@
 <h1 id="tableLabel">Tasks</h1>
 
-<div *ngIf="!tasks" class="d-flex justify-content-center">
-  <div class="spinner-border" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-</div>
+<mat-spinner *ngIf="!tasks"></mat-spinner>
 
-<button class="btn btn-primary mb-3" [routerLink]="['/task-create']">Add new task</button>
+<mat-toolbar>
+<button mat-button [routerLink]="['/task-details', 20]">
+  <mat-icon>add</mat-icon>More</button>
+<button mat-button  [routerLink]="['/task-edit', 20]">
+  <mat-icon>edit</mat-icon>Edit</button>
+<button mat-button>
+  <mat-icon>delete_forever</mat-icon>Delete</button>
+<button mat-button matBadge="{{tasks.length}}" matBadgePosition="above after" [routerLink]="['/task-create']">
+  <mat-icon>library_add</mat-icon>New Task
+</button>
+</mat-toolbar>
+<app-table [displayedColumns]="columns" [dataSource]="tasks" (deleteTaskEvent)="delete($event)"></app-table>
 
-<button class="btn btn-primary mb-3 ml-2" (click)="tasks.sort(dynamicSort('id'))">Sort by id</button>
-<button class="btn btn-primary mb-3 ml-2" (click)="tasks.sort(dynamicSort('title'))">Sort by title</button>
-<button class="btn btn-primary mb-3 ml-2" (click)="tasks.sort(dynamicSort('description'))">Sort by description</button>
-
-<form class="form-inline" [formGroup]="searchForm">
-  <input class="form-control mr-sm-2" formControlName="searchValue" type="search" placeholder="Search by title" aria-label="Search">
-  <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="filterByTitle($event.target)">Search
-  </button>
-</form>
-
-<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="tasks">
-  <thead>
-  <tr>
-    <th>Id</th>
-    <th>Title</th>
-    <th>Description</th>
-    <th>Added</th>
-    <th>DeadLine</th>
-    <th>Importance</th>
-    <th>State</th>
-    <th>ClosedAt</th>
-    <th>Comments</th>
-    <th>Operations</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let task of tasks">
-    <td>{{ task.id }}</td>
-    <td>{{ task.title }}</td>
-    <td>{{ task.description }}</td>
-    <td>{{ task.added }}</td>
-    <td>{{ task.deadline }}</td>
-    <td>{{ task.importance }}</td>
-    <td>{{ task.state }}</td>
-    <td>{{ task.closedAt }}</td>
-    <td>{{ task.numberOfComments }}</td>
-    <td>
-      <button class="btn btn-primary m-2" [routerLink]="['/task-details', task.id]">Details</button>
-      <button class="btn btn-info m-2" [routerLink]="['/task-edit', task.id]">Edit</button>
-      <button class="btn btn-danger m-2" (click)="delete(task.id)">Delete</button>
-    </td>
-  </tr>
-  </tbody>
-</table>
