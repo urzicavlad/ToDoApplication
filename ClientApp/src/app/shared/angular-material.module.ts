@@ -14,6 +14,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   imports: [
@@ -31,7 +35,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatCheckboxModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatChipsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     MatSlideToggleModule,
@@ -48,7 +56,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatCheckboxModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatChipsModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
 })
 

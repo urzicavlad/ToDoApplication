@@ -1,0 +1,57 @@
+<h1 mat-dialog-title>Create Task</h1>
+
+<form mat-dialog-content [formGroup]="taskForm">
+  <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput #input maxlength="10" placeholder="Ex. Nougat" formControlName="title" id="title" name="title"
+           [(ngModel)]="task.title">
+    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description" id="description" name="description"
+              [(ngModel)]="task.description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Importance</mat-label>
+    <mat-select formControlName="importance" id="importance" [(ngModel)]="task.importance">
+      <mat-option value="High">High</mat-option>
+      <mat-option value="Low">Low</mat-option>
+      <mat-option value="Medium">Medium</mat-option>
+    </mat-select>
+    <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>State</mat-label>
+    <mat-select formControlName="state" id="state" [(ngModel)]="task.state">
+      <mat-option value="Open">Open</mat-option>
+      <mat-option value="InProgress">In Progress</mat-option>
+      <mat-option value="Closed">Closed</mat-option>
+    </mat-select>
+    <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Added</mat-label>
+    <input matInput [matDatepicker]="addedPicker" formControlName="added" id="added" name="added"
+           [(ngModel)]="task.added">
+    <mat-datepicker-toggle matSuffix [for]="addedPicker"></mat-datepicker-toggle>
+    <mat-datepicker #addedPicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Deadline</mat-label>
+    <input matInput [matDatepicker]="deadlinePicker" formControlName="deadline" id="deadline" name="deadline"
+           [(ngModel)]="task.deadline">
+    <mat-datepicker-toggle matSuffix [for]="deadlinePicker"></mat-datepicker-toggle>
+    <mat-datepicker #deadlinePicker></mat-datepicker>
+  </mat-form-field>
+</form>
+
+<div mat-dialog-actions>
+  <button mat-button color="warn" (click)="onCancel()">Cancel</button>
+  <button mat-button color="primary" (click)="onSave()">Save</button>
+</div>

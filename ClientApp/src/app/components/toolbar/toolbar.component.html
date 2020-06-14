@@ -1,11 +1,19 @@
 <mat-toolbar>
-  <button mat-button [routerLink]="['/task-details', 20]">
-    <mat-icon>add</mat-icon>More</button>
-  <button mat-button  [routerLink]="['/task-edit', 20]">
-    <mat-icon>edit</mat-icon>Edit</button>
-  <button mat-button>
-    <mat-icon>delete_forever</mat-icon>Delete</button>
-  <button mat-button matBadge="{{tasks.length}}" matBadgePosition="above after" [routerLink]="['/task-create']">
-    <mat-icon>library_add</mat-icon>New Task
+  <h5 *ngIf="selectedTask">{{selectedTask.title}}</h5>
+  <button mat-button *ngIf="selectedTask" [routerLink]="['/task-details', selectedTask.id]">
+    <mat-icon>add</mat-icon>
+    More
+  </button>
+  <button mat-button *ngIf="selectedTask" (click)="onEdit()">
+    <mat-icon>edit</mat-icon>
+    Edit
+  </button>
+  <button mat-button *ngIf="selectedTask" (click)="onDelete()">
+    <mat-icon>delete_forever</mat-icon>
+    Delete
+  </button>
+  <button mat-button matBadge="{{numberOfTasks}}" matBadgePosition="above after" (click)="onCreate()">
+    <mat-icon>library_add</mat-icon>
+    New Task
   </button>
 </mat-toolbar>
