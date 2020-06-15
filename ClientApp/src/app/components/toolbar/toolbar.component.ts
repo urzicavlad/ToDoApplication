@@ -12,6 +12,7 @@ export class ToolbarComponent implements OnInit {
   @Input() selectedTask: Task;
   @Input() numberOfTasks: number;
   @Output() refresh: EventEmitter<void> = new EventEmitter<void>();
+  @Output() toggleDashboard: EventEmitter<void> = new EventEmitter<void>();
 
 
   constructor(public taskService: TaskService) {
@@ -30,6 +31,11 @@ export class ToolbarComponent implements OnInit {
 
   onEdit() {
     this.taskService.edit(this.selectedTask, () => this.refresh.emit());
+  }
+
+  onDashboard() {
+    console.log('Dashboard view!');
+    this.toggleDashboard.emit();
   }
 
 }

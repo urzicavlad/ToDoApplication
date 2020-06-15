@@ -66,11 +66,7 @@ namespace ToDoApp.Controllers
         [HttpPut("{taskId}")]
         public async Task<ActionResult<IEnumerable<TaskDto>>> PutTask(long taskId, TaskDto task)
         {
-            if (taskId != task.Id)
-            {
-                return BadRequest();
-            }
-
+            
             var taskEntity = TaskMapper.mapFromDto(task);
 
             if (taskEntity.State == State.Closed)

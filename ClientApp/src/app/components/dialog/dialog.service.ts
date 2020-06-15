@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {Observable} from 'rxjs';
 import {DialogComponent} from './dialog.component';
-import {CreateTaskModalComponent} from '../create-task-modal/create-task-modal.component';
+import {TaskModalComponent} from '../task-modal/task-modal.component';
 import {Task} from '../../models/task';
 
 
@@ -27,16 +27,17 @@ export class DialogService {
     return dialogRef.afterClosed();
   }
 
-  openCreateTaskDialog(): Observable<CreateTaskModalComponent> {
-    const dialogRef = this.dialog.open(CreateTaskModalComponent, {
+  openCreateTaskDialog(): Observable<TaskModalComponent> {
+    const dialogRef = this.dialog.open(TaskModalComponent, {
       width: '600px',
       height: '600px',
+      data: 'Create new Task'
     });
     return dialogRef.afterClosed();
   }
 
-  openEditTaskDialog(oldTask: Task): Observable<CreateTaskModalComponent> {
-    const dialogRef = this.dialog.open(CreateTaskModalComponent, {
+  openEditTaskDialog(oldTask: Task): Observable<Task> {
+    const dialogRef = this.dialog.open(TaskModalComponent, {
       width: '600px',
       height: '600px',
       data: oldTask

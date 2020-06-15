@@ -1,12 +1,14 @@
-<div>
-  <h1>Tasks</h1>
-  <app-toolbar
-    [selectedTask]="selection.selected[0]"
-    [numberOfTasks]="numberOfResults"
-    (refresh)="refresh()">
-  </app-toolbar>
-</div>
-<div class="container">
+<!--<div>-->
+<!--  <h1>Tasks</h1>-->
+<!--  <app-toolbar-->
+<!--    [selectedTask]="selection.selected[0]"-->
+<!--    [numberOfTasks]="numberOfResults"-->
+<!--    (refresh)="refresh()"-->
+<!--    (toggleDashboard)="toggleDashboard()"-->
+<!--  >-->
+<!--  </app-toolbar>-->
+<!--</div>-->
+<div *ngIf="!showDashboard" class="container">
   <div class="loading-shade" *ngIf="isLoadingResults">
     <mat-spinner></mat-spinner>
   </div>
@@ -19,7 +21,6 @@
     </mat-form-field>
   </div>
   <div class="table-container">
-
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z15"
            matSort matSortActive="id" matSortDisableClear matSortDirection="desc">
 
@@ -65,7 +66,7 @@
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-          (click)="toggle(row)">
+          (click)="onSelect(row)">
       </tr>
     </table>
   </div>
@@ -74,3 +75,5 @@
                    showFirstLastButtons></mat-paginator>
   </div>
 </div>
+
+<app-dashboard *ngIf="showDashboard"></app-dashboard>

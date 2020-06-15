@@ -18,14 +18,17 @@ import {DialogComponent} from './components/dialog/dialog.component';
 import {SnackbarService} from './components/snackbar/snackbar.service';
 import {ToolbarComponent} from './components/toolbar/toolbar.component';
 import {TaskService} from './components/table/task.service';
-import { CreateTaskModalComponent } from './components/create-task-modal/create-task-modal.component';
+import { TaskModalComponent } from './components/task-modal/task-modal.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { TasksPageComponent } from './components/tasks-page/tasks-page.component';
+
 
 
 const routes: Route[] = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: '', component: HomeComponent, pathMatch: 'full'},
-  {path: 'tasks', component: TableComponent},
+  {path: 'tasks', component: TasksPageComponent},
   {path: 'task-details/:taskId', component: TaskDetailComponent},
   {path: 'task-edit/:taskId', component: TaskEditComponent},
 ];
@@ -43,7 +46,9 @@ const routes: Route[] = [
     TableComponent,
     DialogComponent,
     ToolbarComponent,
-    CreateTaskModalComponent,
+    TaskModalComponent,
+    DashboardComponent,
+    TasksPageComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),

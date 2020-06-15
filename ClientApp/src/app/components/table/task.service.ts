@@ -46,15 +46,16 @@ export class TaskService {
   }
 
   edit(oldTask: Task, refreshDataCallback: Function) {
-    this.dialogService.openEditTaskDialog(oldTask).subscribe(taskToBeSaved => {
+    this.dialogService.openEditTaskDialog(oldTask).subscribe(taskToBeEdited => {
       console.log('The dialog was closed');
-      console.log(taskToBeSaved);
-      if (taskToBeSaved) {
-        this._http.put<Task>(`${this.baseUrl}tasks/${oldTask.id}`, taskToBeSaved)
+      if (taskToBeEdited) {
+        taskToBeEdited.id = oldTask.id;
+        console.log(taskToBeEdited);
+        this._http.put<Task>(`${this.baseUrl}tasks/${oldTask.id}`, taskToBeEdited)
           .subscribe
           (
             () => {
-              const snackBar = <SnackbarData>{message: 'Task was successfully saved!', action: 'Close', duration: 2000};
+              const snackBar = <SnackbarData>{message: 'Task was successfully edited and saved!', action: 'Close', duration: 2000};
               this.snackbarService.openSnackBar(snackBar);
               refreshDataCallback();
             },

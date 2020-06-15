@@ -22,7 +22,8 @@ export class TableComponent implements AfterViewInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @Output() selectedTask: EventEmitter<Task> = new EventEmitter<Task>();
+  @Output() toggleToolbarOptions: EventEmitter<Task> = new EventEmitter<Task>();
+  showDashboard: boolean;
 
   constructor(private taskService: TaskService) {
   }
@@ -33,10 +34,10 @@ export class TableComponent implements AfterViewInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  toggle(task: Task) {
+  onSelect(task: Task) {
     this.selection.toggle(task);
     if (this.selection.isSelected(task)) {
-      this.selectedTask.emit(task);
+      this.toggleToolbarOptions.emit(task);
     }
   }
 
@@ -53,8 +54,13 @@ export class TableComponent implements AfterViewInit {
   }
 
   refresh() {
-    console.log('refresh!');
+    console.log('Refresh table!');
     this.ngAfterViewInit();
+  }
+
+  toggleDashboard() {
+    console.log('Toggle dashboard!');
+    this.showDashboard = !this.showDashboard;
   }
 
 }

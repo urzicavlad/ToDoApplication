@@ -1,11 +1,11 @@
-<h1 mat-dialog-title>Create Task</h1>
+<h1 mat-dialog-title>Create new task</h1>
 
 <form mat-dialog-content [formGroup]="taskForm">
   <mat-form-field hintLabel="Max 10 characters" appearance="fill">
     <mat-label>Title</mat-label>
-    <input matInput #input maxlength="10" placeholder="Ex. Nougat" formControlName="title" id="title" name="title"
+    <input matInput #input maxlength="20" placeholder="Ex. Nougat" formControlName="title" id="title" name="title"
            [(ngModel)]="task.title">
-    <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+    <mat-hint align="end">{{input.value?.length || 0}}/20</mat-hint>
   </mat-form-field>
 
   <mat-form-field appearance="fill">
