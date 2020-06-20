@@ -1,14 +1,14 @@
 <mat-toolbar>
   <h5 *ngIf="selectedTask">{{selectedTask.title}}</h5>
-  <button mat-button *ngIf="selectedTask" [routerLink]="['/task-details', selectedTask.id]">
+  <button mat-button *ngIf="selectedTask && applicationService.isLoggedIn()" [routerLink]="['/task-details', selectedTask.id]">
     <mat-icon>add</mat-icon>
     More
   </button>
-  <button mat-button *ngIf="selectedTask" (click)="onEdit()">
+  <button mat-button *ngIf="selectedTask && applicationService.isLoggedIn()" (click)="onEdit()">
     <mat-icon>edit</mat-icon>
     Edit
   </button>
-  <button mat-button *ngIf="selectedTask" (click)="onDelete()">
+  <button mat-button *ngIf="selectedTask && applicationService.isLoggedIn()" (click)="onDelete()">
     <mat-icon>delete_forever</mat-icon>
     Delete
   </button>

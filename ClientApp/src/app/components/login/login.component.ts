@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginModel} from '../../core/services/security.models';
+import {SecurityService} from '../../core/services/security.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,15 +10,18 @@ import {LoginModel} from '../../core/services/security.models';
 })
 export class LoginComponent implements OnInit {
 
-  public login: LoginModel = <LoginModel> {};
+  public login: LoginModel = <LoginModel>{};
 
-  constructor() { }
+  constructor(private securityService: SecurityService, private router: Router) {
+  }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
   loginUser() {
-    console.log(`Login user : ${JSON.stringify(this.login)}`);
+    this.securityService.login(this.login).subscribe(token => {
+      this.router.navigate(['/tasks']);
+    });
   }
 
 }

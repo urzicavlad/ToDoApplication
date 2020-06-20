@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {SecurityService} from '../../core/services/security.service';
+import {ApplicationService} from '../../core/services/application.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -8,6 +10,9 @@ import { Component } from '@angular/core';
 export class NavMenuComponent {
   isExpanded = false;
 
+  constructor(private securityService: SecurityService, public applicationService: ApplicationService) {
+  }
+
   collapse() {
     this.isExpanded = false;
   }
@@ -15,4 +20,9 @@ export class NavMenuComponent {
   toggle() {
     this.isExpanded = !this.isExpanded;
   }
+
+  logOut() {
+    this.securityService.logout();
+  }
+
 }

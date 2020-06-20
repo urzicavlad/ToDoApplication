@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {Task} from 'src/app/models/task';
 import {MatSort} from '@angular/material/sort';
 import {SelectionModel} from '@angular/cdk/collections';
@@ -22,8 +22,8 @@ export class TableComponent implements AfterViewInit {
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @Output() toggleToolbarOptions: EventEmitter<Task> = new EventEmitter<Task>();
-  showDashboard: boolean;
+  isDashboardActive = false;
+  selectedTask: Task;
 
   constructor(private taskService: TaskService) {
   }
@@ -37,12 +37,14 @@ export class TableComponent implements AfterViewInit {
   onSelect(task: Task) {
     this.selection.toggle(task);
     if (this.selection.isSelected(task)) {
-      this.toggleToolbarOptions.emit(task);
+      this.selectedTask = task;
+    } else {
+      this.selectedTask = null;
     }
   }
 
-  ngAfterViewInit() {
-    return this.taskService.loadTasks().subscribe(tasks => {
+  loadTasks() {
+    this.taskService.loadTasks().subscribe(tasks => {
       this.isLoadingResults = false;
       this.numberOfResults = tasks.length;
       this.dataSource = new MatTableDataSource<Task>(tasks);
@@ -53,14 +55,17 @@ export class TableComponent implements AfterViewInit {
     });
   }
 
+  ngAfterViewInit() {
+    this.loadTasks();
+  }
+
   refresh() {
-    console.log('Refresh table!');
-    this.ngAfterViewInit();
+    console.log('Refreshing table component!');
+    this.loadTasks();
   }
 
   toggleDashboard() {
-    console.log('Toggle dashboard!');
-    this.showDashboard = !this.showDashboard;
+    this.isDashboardActive = !this.isDashboardActive;
   }
 
 }
